@@ -59,9 +59,9 @@ namespace LootTableEditor
 		Random random = new Random();
 		private void OnLootDrop(NpcLootDropEventArgs args)
 		{
-			#if DEBUG
+#if DEBUG
 			Console.WriteLine("NPCID:{0}[NPCArrayIndex:{1}]: (X:{2}, Y:{3}) - Item:{4}", args.NpcId, args.NpcArrayIndex, args.Position.X, args.Position.Y, args.ItemId);
-			#endif
+#endif
 			
 			if (config.LootReplacements.ContainsKey(args.NpcId))
 			{
@@ -69,6 +69,10 @@ namespace LootTableEditor
 
 				if (Main.bloodMoon && repl.drops.ContainsKey(State.Bloodmoon))
 				{
+#if DEBUG
+							Console.WriteLine("LootTableEditor: BloodMoon Drops found.");
+#endif
+					
 					foreach (Drop d in repl.drops[State.Bloodmoon])
 					{
 						double rng = random.NextDouble();
@@ -78,9 +82,9 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 							
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: BloodMoonDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							args.Handled = true;
 
@@ -92,6 +96,9 @@ namespace LootTableEditor
 
 				if (Main.eclipse && repl.drops.ContainsKey(State.Eclipse))
 				{
+#if DEBUG
+					Console.WriteLine("LootTableEditor: Eclipse Drops found.");
+#endif
 					foreach (Drop d in repl.drops[State.Eclipse])
 					{
 						double rng = random.NextDouble();
@@ -101,9 +108,9 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: EclipseDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							args.Handled = true;
 
@@ -115,6 +122,9 @@ namespace LootTableEditor
 
 				if (Main.moonPhase == 0 && !Main.dayTime && repl.drops.ContainsKey(State.Fullmoon))
 				{
+#if DEBUG
+					Console.WriteLine("LootTableEditor: Fullmoon Drops found.");
+#endif
 					foreach (Drop d in repl.drops[State.Fullmoon])
 					{
 						double rng = random.NextDouble();
@@ -124,9 +134,9 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: FullmoonDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							args.Handled = true;
 
@@ -138,6 +148,9 @@ namespace LootTableEditor
 
 				if (!Main.dayTime && repl.drops.ContainsKey(State.Night))
 				{
+#if DEBUG
+					Console.WriteLine("LootTableEditor: Night Drops found.");
+#endif
 					foreach (Drop d in repl.drops[State.Night])
 					{
 						double rng = random.NextDouble();
@@ -147,9 +160,9 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: NightDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							args.Handled = true;
 
@@ -161,6 +174,9 @@ namespace LootTableEditor
 
 				if (Main.dayTime && repl.drops.ContainsKey(State.Day))
 				{
+#if DEBUG
+					Console.WriteLine("LootTableEditor: Day Drops found.");
+#endif
 					foreach (Drop d in repl.drops[State.Day])
 					{
 						double rng = random.NextDouble();
@@ -170,9 +186,9 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: DayDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							args.Handled = true;
 
@@ -184,6 +200,9 @@ namespace LootTableEditor
 
 				if (repl.drops.ContainsKey(State.Normal))
 				{
+#if DEBUG
+					Console.WriteLine("LootTableEditor: Normal Drops found.");
+#endif
 					foreach (Drop d in repl.drops[State.Normal])
 					{
 						double rng = random.NextDouble();
@@ -194,9 +213,9 @@ namespace LootTableEditor
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 							args.Handled = true;
 	
-							#if DEBUG
+#if DEBUG
 							Console.WriteLine("LootTableEditor: NormalDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
-							#endif
+#endif
 							
 							if (!repl.tryEachItem)
 								break;
