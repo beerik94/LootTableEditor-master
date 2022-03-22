@@ -1,5 +1,9 @@
 # LootTableEditor-master
 
+NOT BEING MAINTAINED ANYMORE
+I made a replacement plugin with some more options
+https://github.com/beerik94/LootControl
+
 
 Works with TShock v4.5.14
 
